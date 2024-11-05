@@ -218,8 +218,32 @@ that has a lot of artists. With the highest count being 8.
 
 # 3. Top Performers
 
+Before starting any slicing, indexing, and subsetting any data, why use a "_for_" loop? The for loop is used to **iterate and check
+the items** through the top 5 most streamed tracks and the top 5 most frequent artists. By doing this, it allows the programmer to
+to access each tracks' information and **output** the **correct and specific details** neatly.
+
 ## Which track has the **highest** number of *'streams'*? Display the **top 5 most** streamed *tracks*.
+using the code below:
+```
+most_streamed_tracks = df.sort_values(by='streams', ascending = False).head(5)
+print("Top 5 most streamed tracks:")
+for idx, row in most_streamed_tracks.iterrows():
+    print(f"Track: {row['track_name']}, Streams: {row['streams']}")
+```
+The results are:
+
+![image](https://github.com/user-attachments/assets/d1be8c60-d80f-4308-9114-313fed585d47)
 
 ## Who are the **top 5** most frequent artists based on the number of tracks in the dataset?
+using the code below:
+```
+top_5_artists = df['artist(s)_name'].value_counts().head(5)
+print("Top 5 most frequent artists:")
+for artist, count in top_5_artists.items():
+    print(f"Artist: {artist}, Frequency: {count}")
+```
+The results are:
+
+![image](https://github.com/user-attachments/assets/f4936d84-cda9-440d-bd38-68b0864633eb)
 
 
