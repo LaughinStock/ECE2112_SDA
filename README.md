@@ -78,6 +78,8 @@ Skipping into the lower portion of the dataframe, the dataset contains 953 rows 
 
 ## What are the datatypes of each column? Are there any missing values?
 
+### Datatypes
+
 Each column corresponds to a datatype, since there are 24 columns, there are 24 different datatypes found in the dataset.
 The datatypes found in order are:
 1. track_name
@@ -90,10 +92,10 @@ The datatypes found in order are:
 8. in_spotify_charts
 9. streams
 10. in_apple_playlists
-11. ..
-12. ..
-13. ..
-14. ..
+11. in_apple_charts
+12. in_deezer_playlists
+13. in_deezer_charts
+14. in_shazam_charts
 15. bpm
 16. key
 17. mode
@@ -105,9 +107,119 @@ The datatypes found in order are:
 23. liveness_%
 24. speechiness_%
 
-But one of the major findings from the overview of the dataset is that there are **indeed** missing values. This is mainly due to the sheer size of the dataset
-itself and the notebook wouldn't be able to display each track and it's corresponding information. **_Column-wise_**, the datatype numbers from 11 to 14 are missing 
-and **_Row-wise_**, tracks number 5 to 947 are missing from the provided table in Jupyter Notebook. 
+### Missing Values
 
-![image](https://github.com/user-attachments/assets/f419d290-334a-4702-ba70-fee6dc1dfe9a)
+After running the code below:
+```
+null_counts = df.isnull().sum()
+print(null_counts)
+```
+This code detects if there are missing values in the dataset and results show that **there are** missing values
+in the data set. According to the image attaced below, the datatypes that include missing values are "_in_shazam_charts_" 
+and "_key._" The probable reasons for these missing values is that:
+1. The track isn't available on the platform (Shazam).
+2. The track's details are not given by the artist to the platform(s).
+3. The artist probably did not mind what "key" they were using.
+4. The data collection process had some issues.
+5. The data was lost for some reason.
+
+![image](https://github.com/user-attachments/assets/a1a84bee-bddd-4237-9ee0-195f7d7e778e)
+
+# 2. Basic Descriptive Statistics
+
+This objective is more focused on the following: 
+- Double-checking for the datatypes
+- Finding and Coverting missing values to "NaN"
+- Indexing, Slicing, and Subsetting dataframes to gather the required data.
+
+## Checking for the datatypes 
+
+Before starting any computation for the mean, median, and mode, sometimes there are tendencies where the numerical data
+contained in the column may be *non-numeric*. Because there may be a time where the error message, "n1, n2,..., nx cannot convert 
+to numeric," shows up when running the code. 
+To troubleshoot, use the code below:
+```
+print(df["streams"].dtype)
+```
+In this current case, the datatype shows is "object" and it may contain non-numeric values. To convert and turn any non-numeric
+values into "NaN," you can use the code:
+```
+df["streams"] = pd.to_numeric(df["streams"], errors="coerce")
+df["streams"].fillna(df["streams"].median(), inplace=True)
+```
+
+## What are **mean, median, and mode** of the *'streams'* column?
+
+To solve for all three at one time, use the code:
+```
+mean = df["streams"].mean()
+median = df["streams"].median()
+mode = df["streams"].mode()[0]  
+
+print("Mean:", mean)
+print("Median:", median)
+print("Mode:", mode)
+```
+This would result in the following answer:
+
+![image](https://github.com/user-attachments/assets/474fdaea-3846-488f-8041-6b6879c40b3d)
+
+
+## What is the distribution of the released_year and artist_count?
+
+### To solve for the distribution of the released year, 
+using the code below:
+```
+year_bins = np.arange(1940, 2028, 4)  # Decade bins from 1940 to 2023
+
+# Group by the defined year bins
+out_year = df.groupby(pd.cut(df['released_year'], bins=year_bins, right=False))['released_year'] \
+    .agg(**{
+        'Min': 'min', 
+        'Max': 'max', 
+        'Count': 'count'
+    })
+
+print("Year Release Analysis:")
+print(out_year)
+```
+This gives the result:
+
+![image](https://github.com/user-attachments/assets/ed45f836-fcd8-4ba6-8d23-0abe00d922cd)
+
+There seems to be a trend in regards to which tracks were mostly played on the different streaming platforms.
+Per usual, the tracks released recently (2020-2024) were streamed a lot while the older ones were not but was
+included in the list for the most streamed songs in Spotify. There are a few tracks included in the list
+that made it but it is believed to be the generational songs that also made it into the current generation's 
+ears. The popularity for older songs is also boosted because of vines, memes, short videos (tiktok, reels, shorts)
+and it makes them appreciate the older songs as well and be able to relate to their parents' music tastes.
+
+### To solve for the distribution of the artist count, 
+using the code below:
+```
+artist_bins = np.arange(1, 8 + 1, 1)
+out_artist = df.groupby(pd.cut(df['artist_count'], artist_bins))['artist_count'] \
+    .agg(**{
+        'Min': 'min', 
+        'Max': 'max', 
+        'Count': 'count',
+    })
+
+print("Artist Count Analysis:")
+print(out_artist)
+```
+This gives the result:
+
+![image](https://github.com/user-attachments/assets/cee0b544-1642-43b7-a082-a301219bb8a1)
+
+Based on the table given by Jupyter Notebook, there are quite a lot of solo and duo artists in a single track.
+Tracks with 1 artist are the highest and as the number of artists featuring increases, there are fewer tracks 
+that has a lot of artists. With the highest count being 8.
+
+# 3. Top Performers
+
+## Which track has the **highest** number of *'streams'*? Display the **top 5 most** streamed *tracks*.
+
+## Who are the **top 5** most frequent artists based on the number of tracks in the dataset?
+
 
