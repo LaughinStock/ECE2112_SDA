@@ -20,6 +20,7 @@ This Programming Assignment deals with the use of previous libraries:
 - Pandas
 - Matplotlib
 - Seaborn
+  
 In order to provide and investigate summary statistics, visualizations, correlations, and
 insights and recommendations regarding the different metrics found in the music scene.
 
@@ -167,7 +168,7 @@ This would result in the following answer:
 
 ## What is the distribution of the released_year and artist_count?
 
-### To solve for the distribution of the released year, 
+### To solve for the distribution of the released year 
 using the code below:
 ```
 year_bins = np.arange(1940, 2028, 4)  # Decade bins from 1940 to 2023
@@ -246,4 +247,107 @@ The results are:
 
 ![image](https://github.com/user-attachments/assets/f4936d84-cda9-440d-bd38-68b0864633eb)
 
+# 4. Temporal trends
 
+Before starting analysis in regards to the number of tracks released over years and months, first know that it is needed
+to group the data in terms of their release year or month and count the number of tracks released. In doing so, it would
+save the time needed to analyze the data.
+
+For annual trends:
+```
+# Group by release year and count the number of tracks released each year
+annual_trends = df.groupby('released_year').size()  # This will give the count of tracks per year
+```
+
+For monthly trends:
+```
+# Group by release month and count the number of tracks released per month
+monthly_trends = df.groupby('released_month').size()  # This will give the count of tracks per month
+```
+
+## Number of tracks released over time
+
+After using the code below:
+```
+# Plotting the number of tracks released over time
+annual_trends.plot(kind='line', title='Number of Tracks Released Over Time')
+plt.xlabel('Year')
+plt.ylabel('Number of Tracks Released')
+plt.show()
+```
+
+We are given this graph:
+
+![image](https://github.com/user-attachments/assets/81ba2369-a497-43f4-8799-d57eff89c04e)
+
+Given how the nature of this dataset goes, it was expected that the recent releases were mostly topping the charts. Since this is a dataset covering
+the top 2023 spotify songs, the older songs were shadowed by the huge spike in graph. But like the explanation from earlier in obective number 2, the reason
+why some of the older songs are featured in the dataset is due to the other listeners coming from the older generations, memes, tiktoks, and etc.
+
+## Number of tracks released per Month
+
+After slightly editing the code earlier:
+```
+# Plotting the number of tracks released over time
+monthly_trends.plot(kind='bar', title='Number of Tracks Released per Month')
+plt.xlabel('Month')
+plt.ylabel('Number of Tracks Released')
+plt.xticks(rotation=0)
+plt.show()
+```
+
+We are given this graph:
+
+![image](https://github.com/user-attachments/assets/9f64ebe2-b76d-4c6a-9f4a-511fd7823aab)
+
+Suprisingly, January tops the chart and is followed by May. A quick Google search explains why. 
+Generally, the first two months of the year is a good time to release music because the market isn't that much
+saturated compared to the releases within the year. And to the consumer's perspective, it would make sense since 
+after the exciting end to the year, people tend to look at the newer and hottest hits that would greatly symbolize their
+start of the year. 
+
+For May, its simply explained as "It's summer! We got time to entertain ourselves!" And the average consumer would listen to hundreds and
+maybe even thousands of music to indulge themselves after their exhausting assignments or workloads at school or at work.
+
+# 5. Genre and Music characteristics
+
+To start with this obective, lets go straight to the heat map itself. If the map is hard to read in the "readme" file, its probably best for the 
+reader to go straight to the code itself in Jupyter Notebook. Do note that positive (red/warm) values correlate well while negative values (blue/cold)
+do not correlate that much.
+
+The used code for this obective:
+```
+# Select columns for correlation, including streams and musical characteristics
+music_characteristics = df[['streams', 'bpm', 'danceability_%', 'energy_%', 'acousticness_%', 'instrumentalness_%', 'liveness_%', 'speechiness_%']] 
+
+# Compute the correlation matrix
+correlation_matrix = music_characteristics.corr()
+
+# Display the correlation matrix
+plt.figure(figsize=(9, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0)
+plt.title("Correlation between Music Characteristics")
+plt.show()
+```
+
+![image](https://github.com/user-attachments/assets/9aee87b3-c776-4b56-ab29-32b1bee6bcde)
+
+Why put every characteristics to the map? It's also good to see the different music characteristics correlate with each other to not only the 
+streams, but also to each other.
+
+## Examine the correlation... 
+between streams and musical attributes like bpm, danceability_%, and energy_%. Which attributes seem to influence streams the most?
+
+For the comparison between bpm, danceability_%, and energy_%, the energy_% influences streams the most since at heart, people tend to 
+listen to music to feel something maybe because of their emotional and physical reactions, maybe because of their social connections, rhythmic influence,
+and maybe to stimulate themselves. And sometimes the energy music brings to them gives them these feelings.
+
+As it is because of that, it influences the streams the most since it has the closest value to zero and it is followed by acousticness_% and intrumentalness_%.
+
+# 6. Platform Popularity (temporary)
+
+## How do the numbers in spotify_playlists, spotify_charts, and apple_playlists compare?
+
+## Which platform seems to favor the most popular tracks?
+
+# 7. Advanced Analysis
