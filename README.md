@@ -345,10 +345,155 @@ and maybe to stimulate themselves. And sometimes the energy music brings to them
 
 As it is because of that, it influences the streams the most since it has the closest value to zero and it is followed by acousticness_% and intrumentalness_%.
 
-# 6. Platform Popularity (temporary)
+# 6. Platform Popularity 
+
+This obective is divided into two parts, first is the comparison between spotify_playlists, spotify_charts, and apple_playlists. 
+While the second part comprises of every platform given in the dataset and compressed into one category to easily compare the final values.
+
+The codes in regards to these parts are not placed in the repository due to the length of the lines of the code probably being too much for 
+the viewer. So instead, the important lines of code are presented to show how the process goes. Because in the second part, there are four different
+platforms being compared and added on. The platforms and their respective sections in the dataset were:
+
+- Spotify (Playlists and Charts)
+- Apple Music (Playlists and Charts)
+- Deezer (Playlists and Charts)
+- Shazam (Charts only)
 
 ## How do the numbers in spotify_playlists, spotify_charts, and apple_playlists compare?
 
+### Here is a snippet of the code:
+```
+# Calculate total occurrences for each platform
+spotify_playlists_total = df['in_spotify_playlists'].sum()
+spotify_charts_total = df['in_spotify_charts'].sum()
+apple_playlists_total = df['in_apple_playlists'].sum()
+
+# Display results in the console
+print("Comparison of Track Appearances in Different Platforms:")
+print(f"Spotify Playlists: {spotify_playlists_total}")
+print(f"Spotify Charts: {spotify_charts_total}")
+print(f"Apple Playlists: {apple_playlists_total}")
+
+# Prepare data for plotting
+platform_counts = {
+    'Spotify Playlists': spotify_playlists_total,
+    'Spotify Charts': spotify_charts_total,
+    'Apple Playlists': apple_playlists_total
+}
+```
+
+### Here are the results in a graph ("Total track apperances * 10^6):
+
+![image](https://github.com/user-attachments/assets/4da6e2c7-b1da-4883-9e38-61eb22d47d9f)
+
+For the three, it was heavily dominated by spotify_playlists followed by apple_playlists and the spotify_charts. Setting aside the dominance
+of spotify_playlists, look at the comparison between charts and playlists. The track appearances are mostly tied to the consumer's playlists rather
+than the weekly or monthly ranking of the platforms' new top performing songs. It generally reflects the user's use of the app since most people nowadays
+would use these streaming apps to look, and download their favourite songs. Its very rare for a user to find and listen to the newer released songs in
+these platoforms since they would rather stick to what is trending, popular, or comfortable in their ears. Though the platforms do generate the charts, 
+the consumers would prefer to stick to their own created playlists.
+
 ## Which platform seems to favor the most popular tracks?
 
+### Here is a snippet of the code:
+
+```
+# 1. Define Popular Tracks - Top 100 tracks by stream count
+top_tracks = df.nlargest(100, 'streams')
+
+# 2. Ensure columns are numeric and handle non-numeric values by filling them with 0
+columns_to_convert = ['in_spotify_playlists', 'in_spotify_charts', 
+                      'in_apple_playlists', 'in_apple_charts', 
+                      'in_deezer_playlists', 'in_deezer_charts', 
+                      'in_shazam_charts']
+
+for column in columns_to_convert:
+    top_tracks[column] = pd.to_numeric(top_tracks[column], errors='coerce').fillna(0).astype(int)
+
+# 3. Calculate occurrences of top tracks in each platform
+top_tracks_spotify_playlists = top_tracks['in_spotify_playlists'].sum()
+top_tracks_spotify_charts = top_tracks['in_spotify_charts'].sum()
+top_tracks_apple_playlists = top_tracks['in_apple_playlists'].sum()
+top_tracks_apple_charts = top_tracks['in_apple_charts'].sum()
+top_tracks_deezer_playlists = top_tracks['in_deezer_playlists'].sum()
+top_tracks_deezer_charts = top_tracks['in_deezer_charts'].sum()
+top_tracks_shazam_charts = top_tracks['in_shazam_charts'].sum()
+
+# 4. Combine counts for playlists and charts per platform
+spotify_total = top_tracks_spotify_playlists + top_tracks_spotify_charts
+apple_total = top_tracks_apple_playlists + top_tracks_apple_charts
+deezer_total = top_tracks_deezer_playlists + top_tracks_deezer_charts
+shazam_total = top_tracks_shazam_charts  # Shazam only has charts, not playlists
+```
+### Here are the results in a graph:
+
+![image](https://github.com/user-attachments/assets/42bbc168-7f33-4d5a-b020-eb802b398b05)
+
+Its no suprise that Spotify continued to dominate in this graph since its currently and probably for a long time, the 
+largest and most popular music streaming platforms globally, with users reaching the hundred millions all around the world.
+With Apple Music coming in second followed by Deezer and Shazam. Currently, the top two music streaming platforms are 
+generally known to a wider audience but since Apple Music is limited to ios and or iMusic softwares and Deezer and Shazam not being
+well-known to the average consumer and maybe even the artist, they would most likely prefer to publish or listen to songs 
+that is on a well-known platform that has large numbers of users on a daily basis. 
+
 # 7. Advanced Analysis
+
+The final objective is also split into two parts. The first part mainly focusing on identifying on the patterns among the tracks with the same key or mode, 
+and the second part is about performing an analysis about the most frequently appearing artists in playlists or charts. 
+
+Also in this part, do note that snippets of the code are shown since these are also very long and its probably better to only show the important
+parts of the code.
+
+## Average streams by key or mode
+
+### Here is a snippet of the code:
+
+```
+# Group by 'key' and 'mode' and calculate average streams
+key_mode_streams = df.groupby(['key', 'mode'])['streams'].mean().unstack()
+```
+
+### Here is the results in a graph:
+
+![image](https://github.com/user-attachments/assets/8c608d01-f4a5-4750-9dda-2d44851b520c)
+
+## Top Artists in Playlists and Charts
+
+### Here is a snippet of the code:
+
+```
+# Ensure playlist/chart columns are boolean or numeric (0/1) so we can sum them correctly
+playlist_columns = ['in_spotify_playlists', 'in_spotify_charts', 
+                    'in_apple_playlists', 'in_apple_charts', 
+                    'in_deezer_playlists', 'in_deezer_charts', 
+                    'in_shazam_charts']
+
+# Convert playlist/chart columns to numeric, setting errors='coerce' to handle non-numeric values
+# and filling non-numeric values (NaN) with 0
+for col in playlist_columns:
+    df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int)
+
+# Summing up occurrences in playlists/charts for each artist
+artist_popularity = df.groupby('artist(s)_name')[playlist_columns].sum()
+artist_popularity['Total'] = artist_popularity.sum(axis=1)
+top_artists = artist_popularity['Total'].sort_values(ascending=False).head(10)
+```
+
+### Here is the results in a graph:
+
+![image](https://github.com/user-attachments/assets/1ee33ac8-4149-4b24-867c-6a6d6ddc57cc)
+
+The top three is The Weeknd, Taylor Swift, and Ed Sheeran. 2023 was a blast for The Weeknd since he has had a lot of 
+major breakthroughs in regards to his music career in 2023. He has had major hits from his newer ("Blinding Lights") and older songs and was
+probably the most well-known singer in 2023. The second spot is from Taylor Swift whom in 2023 had a breakthrough in her career.
+from re-releasing her older albums (1989), to having the highest-grossing concert of all time, it was no suprise that she made it to second. 
+And finally completing the top three is Ed Sheeran which is suprising since lately he hasn't been releasing new albums or songs but he is still here.
+Though not well-known around here in the Philippines, he has done quite a lot of concerts (large and one-to-one) that gained traction around the internet 
+and that made people love the guy. 
+
+Oh and do note that since the dataset also includes numbers from playlists, it is also expected that some of the older
+artists can make it into the graph.
+
+# 8. Comments and recommendations by the author
+
+
