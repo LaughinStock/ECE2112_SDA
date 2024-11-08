@@ -31,8 +31,9 @@ insights and recommendations regarding the different metrics found in the music 
 2. Basic Descriptive Statistics
 3. Finding the **Top _performer_** and the **Highest _Streams._**
 4. Analyzing the music **Trends** within 2023.
-5. Examining different **Music _Characteristics_** and their **correlation** to **_streams_**
-6. Performing Advanced Analysis among the tracks
+5. Examining different **Music _Characteristics_** and their **correlation** to _streams._
+6. Checking the **Popularity** between different _streaming platforms_.
+7. Performing **Advanced Analysis** among the tracks.
 
 # Extraction of the dataset and importing the _".csv"_ file into Jupyter Notebook
 
