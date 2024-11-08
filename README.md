@@ -17,9 +17,10 @@ The link for the 2023 Spotify dataset is attached below:
 https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023/data
 
 This Programming Assignment deals with the use of previous libraries:
-- Numpy
-- Pandas
-- Matplotlib
+- Numpy (np)
+- Pandas (pd)
+- Matplotlib (plt)
+- Seaborn (sns)
   
 In order to provide and investigate summary statistics, visualizations, correlations, and
 insights and recommendations regarding the different metrics found in the music scene.
