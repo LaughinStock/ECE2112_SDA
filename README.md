@@ -290,6 +290,8 @@ plt.show()
 
 ![image](https://github.com/user-attachments/assets/81ba2369-a497-43f4-8799-d57eff89c04e)
 
+### Discussion of results
+
 Given how the nature of this dataset goes, it was expected that the recent releases were mostly topping the charts. Since this is a dataset covering
 the top 2023 spotify songs, the older songs were shadowed by the huge spike in graph. But like the explanation from earlier in obective number 2, the reason
 why some of the older songs are featured in the dataset is due to the other listeners coming from the older generations, memes, tiktoks, and etc.
