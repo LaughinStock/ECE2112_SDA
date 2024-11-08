@@ -112,10 +112,12 @@ The datatypes found in order are:
 ### Missing Values
 
 After running the code below:
+
 ```
 null_counts = df.isnull().sum()
 print(null_counts)
 ```
+
 This code detects if there are missing values in the dataset and results show that **there are** missing values
 in the data set. According to the image attaced below, the datatypes that include missing values are "_in_shazam_charts_" 
 and "_key._" The probable reasons for these missing values is that:
@@ -152,7 +154,8 @@ df["streams"].fillna(df["streams"].median(), inplace=True)
 
 ## What are **mean, median, and mode** of the *'streams'* column?
 
-To solve for all three at one time, use the code:
+### To solve for all three at one time, use the code:
+
 ```
 mean = df["streams"].mean()
 median = df["streams"].median()
@@ -162,15 +165,15 @@ print("Mean:", mean)
 print("Median:", median)
 print("Mode:", mode)
 ```
-This would result in the following answer:
+
+### This would result in the following answer:
 
 ![image](https://github.com/user-attachments/assets/474fdaea-3846-488f-8041-6b6879c40b3d)
 
-
 ## What is the distribution of the released_year and artist_count?
 
-### To solve for the distribution of the released year 
-using the code below:
+### The code used:
+
 ```
 year_bins = np.arange(1940, 2028, 4)  # Decade bins from 1940 to 2023
 
@@ -185,9 +188,12 @@ out_year = df.groupby(pd.cut(df['released_year'], bins=year_bins, right=False))[
 print("Year Release Analysis:")
 print(out_year)
 ```
-This gives the result:
+
+### Here are the results in a bargraph:
 
 ![image](https://github.com/user-attachments/assets/ed45f836-fcd8-4ba6-8d23-0abe00d922cd)
+
+### Discussion of results:
 
 There seems to be a trend in regards to which tracks were mostly played on the different streaming platforms.
 Per usual, the tracks released recently (2020-2024) were streamed a lot while the older ones were not but was
@@ -196,8 +202,7 @@ that made it but it is believed to be the generational songs that also made it i
 ears. The popularity for older songs is also boosted because of vines, memes, short videos (tiktok, reels, shorts)
 and it makes them appreciate the older songs as well and be able to relate to their parents' music tastes.
 
-### To solve for the distribution of the artist count, 
-using the code below:
+### Here is the code used:
 ```
 artist_bins = np.arange(1, 8 + 1, 1)
 out_artist = df.groupby(pd.cut(df['artist_count'], artist_bins))['artist_count'] \
@@ -210,9 +215,11 @@ out_artist = df.groupby(pd.cut(df['artist_count'], artist_bins))['artist_count']
 print("Artist Count Analysis:")
 print(out_artist)
 ```
-This gives the result:
+### This gives the result:
 
 ![image](https://github.com/user-attachments/assets/cee0b544-1642-43b7-a082-a301219bb8a1)
+
+### Discussion of results:
 
 Based on the table given by Jupyter Notebook, there are quite a lot of solo and duo artists in a single track.
 Tracks with 1 artist are the highest and as the number of artists featuring increases, there are fewer tracks 
@@ -254,13 +261,15 @@ Before starting analysis in regards to the number of tracks released over years 
 to group the data in terms of their release year or month and count the number of tracks released. In doing so, it would
 save the time needed to analyze the data.
 
-For annual trends:
+a. For annual trends:
+
 ```
 # Group by release year and count the number of tracks released each year
 annual_trends = df.groupby('released_year').size()  # This will give the count of tracks per year
 ```
 
-For monthly trends:
+b. For monthly trends:
+
 ```
 # Group by release month and count the number of tracks released per month
 monthly_trends = df.groupby('released_month').size()  # This will give the count of tracks per month
@@ -268,7 +277,7 @@ monthly_trends = df.groupby('released_month').size()  # This will give the count
 
 ## Number of tracks released over time
 
-After using the code below:
+### Here is the code used:
 ```
 # Plotting the number of tracks released over time
 annual_trends.plot(kind='line', title='Number of Tracks Released Over Time')
@@ -277,7 +286,7 @@ plt.ylabel('Number of Tracks Released')
 plt.show()
 ```
 
-We are given this graph:
+### Here are the results in a linegraph:
 
 ![image](https://github.com/user-attachments/assets/81ba2369-a497-43f4-8799-d57eff89c04e)
 
@@ -287,7 +296,8 @@ why some of the older songs are featured in the dataset is due to the other list
 
 ## Number of tracks released per Month
 
-After slightly editing the code earlier:
+### Here is the code used:
+
 ```
 # Plotting the number of tracks released over time
 monthly_trends.plot(kind='bar', title='Number of Tracks Released per Month')
@@ -297,9 +307,11 @@ plt.xticks(rotation=0)
 plt.show()
 ```
 
-We are given this graph:
+### Here are the results in a bargraph:
 
 ![image](https://github.com/user-attachments/assets/9f64ebe2-b76d-4c6a-9f4a-511fd7823aab)
+
+### Discussion of results:
 
 Suprisingly, January tops the chart and is followed by May. A quick Google search explains why. 
 Generally, the first two months of the year is a good time to release music because the market isn't that much
@@ -316,7 +328,8 @@ To start with this obective, lets go straight to the heat map itself. If the map
 reader to go straight to the code itself in Jupyter Notebook. Do note that positive (red/warm) values correlate well while negative values (blue/cold)
 do not correlate that much.
 
-The used code for this obective:
+## The code used:
+
 ```
 # Select columns for correlation, including streams and musical characteristics
 music_characteristics = df[['streams', 'bpm', 'danceability_%', 'energy_%', 'acousticness_%', 'instrumentalness_%', 'liveness_%', 'speechiness_%']] 
@@ -331,12 +344,13 @@ plt.title("Correlation between Music Characteristics")
 plt.show()
 ```
 
+## Here are the results in a heatmap:
+
 ![image](https://github.com/user-attachments/assets/9aee87b3-c776-4b56-ab29-32b1bee6bcde)
 
-Why put every characteristics to the map? It's also good to see the different music characteristics correlate with each other to not only the 
-streams, but also to each other.
 
 ## Examine the correlation... 
+
 between streams and musical attributes like bpm, danceability_%, and energy_%. Which attributes seem to influence streams the most?
 
 For the comparison between bpm, danceability_%, and energy_%, the energy_% influences streams the most since at heart, people tend to 
@@ -386,6 +400,8 @@ platform_counts = {
 
 ![image](https://github.com/user-attachments/assets/4da6e2c7-b1da-4883-9e38-61eb22d47d9f)
 
+### Discussion of results
+
 For the three, it was heavily dominated by spotify_playlists followed by apple_playlists and the spotify_charts. Setting aside the dominance
 of spotify_playlists, look at the comparison between charts and playlists. The track appearances are mostly tied to the consumer's playlists rather
 than the weekly or monthly ranking of the platforms' new top performing songs. It generally reflects the user's use of the app since most people nowadays
@@ -428,6 +444,8 @@ shazam_total = top_tracks_shazam_charts  # Shazam only has charts, not playlists
 ### Here are the results in a graph:
 
 ![image](https://github.com/user-attachments/assets/42bbc168-7f33-4d5a-b020-eb802b398b05)
+
+### Discussion of results
 
 Its no suprise that Spotify continued to dominate in this graph since its currently and probably for a long time, the 
 largest and most popular music streaming platforms globally, with users reaching the hundred millions all around the world.
