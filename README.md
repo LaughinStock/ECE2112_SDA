@@ -457,6 +457,14 @@ key_mode_streams = df.groupby(['key', 'mode'])['streams'].mean().unstack()
 
 ![image](https://github.com/user-attachments/assets/8c608d01-f4a5-4750-9dda-2d44851b520c)
 
+### Discussion of results
+
+The key findings in the graph is that the consumers would prefer to listen to songs that has an average key from F to C# and they 
+would prefer to have a mode that is a Major. The reason why consumers would prefer to listen to songs that mostly have a mode of 
+Major is because of its songs generally being happy while Minor modes tend to be intensive or melancholic. For the key signatures, 
+the consumers gravitate towards the keys that are F, E, D#, D, and C#. The reason also ties with the preference of songs that are
+generally happy, warm, and have common instruments that accompanies the vocalists very well.
+
 ## Top Artists in Playlists and Charts
 
 ### Here is a snippet of the code:
@@ -482,6 +490,8 @@ top_artists = artist_popularity['Total'].sort_values(ascending=False).head(10)
 ### Here is the results in a graph:
 
 ![image](https://github.com/user-attachments/assets/1ee33ac8-4149-4b24-867c-6a6d6ddc57cc)
+
+### Discussion of results
 
 The top three is The Weeknd, Taylor Swift, and Ed Sheeran. 2023 was a blast for The Weeknd since he has had a lot of 
 major breakthroughs in regards to his music career in 2023. He has had major hits from his newer ("Blinding Lights") and older songs and was
