@@ -366,7 +366,8 @@ For the comparison between bpm, danceability_%, and energy_%. **Energy_% influen
 listen to music to feel something maybe because of their emotional and physical reactions, maybe because of their social connections, rhythmic influence,
 and maybe to stimulate themselves. And sometimes the energy music brings to them gives them these feelings.
 
-Because of that, it influences the streams the most since it has the closest value to zero and it is followed by acousticness_% and intrumentalness_%.
+But the music characteristic that influences *streams* the **most** is **acousticness_%** since it has the closest value to zero and is followed by 
+energy_%, and instrumentalness_%.
 
 # 6. Platform Popularity 
 
@@ -540,7 +541,7 @@ and comments because it would probably be the best option for this.
 ## If you are an artist that is aspiring to be big in the future, based on the analysis you should:
 
 - It is best to release songs along the start (first two months) of the first and second quarters of the year since these are the times when people do have the time to listen to the songs and they would like to start the year or summer with a blast.
-- Make a song that focuses on bringing the energy you produce from music towards the audience since this would have a great impact towards their emotions, (Mali to acousticness_% dapat yung most focused pero isama na din yung energy)
+- Make a song that focuses on bringing the energy you produce from music towards the audience since this would have a great impact towards their emotions, focus on bringing the instruments that bring the acousticness in music.
 - It is also best that you should publish your songs on Spotify since its the largest streaming platform currently and capitalizing on its recent rise is also a good thing.
 - Focus on having a song that has fluctuating key signatures from "F" to "C#" and a mode that is "Major" as they're mostly warm, happy, and it tends to blend to the instruments and vocalists very well.
 
