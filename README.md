@@ -20,7 +20,6 @@ This Programming Assignment deals with the use of previous libraries:
 - Numpy
 - Pandas
 - Matplotlib
-- Seaborn
   
 In order to provide and investigate summary statistics, visualizations, correlations, and
 insights and recommendations regarding the different metrics found in the music scene.
@@ -37,7 +36,7 @@ insights and recommendations regarding the different metrics found in the music 
 
 # Extraction of the dataset and importing the _".csv"_ file into Jupyter Notebook
 
-Before starting any analysis, first download the dataset from the link attached in #introcution 
+Before starting any analysis, first **download the dataset** from the link attached in #introcution 
 and then under the *download* tab, download the dataset as *.zip* and then extract the file named
 "*spotify-2023.csv*" into your folder for Jupyter Notebook.
 
@@ -57,7 +56,7 @@ import seaborn as sns
 
 # 1. Overview of the Dataset
 
-To start with this objective, first import the file, **spotify-2023.csv** into the Jupyter Notebook
+To start with this objective, first **import** the file, *spotify-2023.csv* into the **Jupyter Notebook.**
 using *"pd.read_csv"*. At first you are greeted with the warning, "UnicodeDecodeError: '*utf-8*' can't decode bytes in position ..."
 
 ![image](https://github.com/user-attachments/assets/4320f383-ce4e-48b3-9f0f-5bc392567f7f)
@@ -74,7 +73,7 @@ df
 
 ## How many rows and columns does the dataset contain?
 
-Skipping into the lower portion of the dataframe, the dataset contains 953 rows and 24 columns.
+Skipping into the lower portion of the dataframe, the *dataset* contains **953 rows and 24 columns.**
 
 ![image](https://github.com/user-attachments/assets/478bd79c-d5eb-499c-841d-c5c6e2858b34)
 
@@ -83,7 +82,7 @@ Skipping into the lower portion of the dataframe, the dataset contains 953 rows 
 
 ### Datatypes
 
-Each column corresponds to a datatype, since there are 24 columns, there are 24 different datatypes found in the dataset.
+Each *column* corresponds to a **datatype**, since there are *24 columns*, there are **24** different datatypes found in the dataset.
 The datatypes found in order are:
 1. track_name
 2. artist(s)_name
@@ -112,14 +111,17 @@ The datatypes found in order are:
 
 ### Missing Values
 
-After running the code below:
+
+#### After running the code below:
 
 ```
 null_counts = df.isnull().sum()
 print(null_counts)
 ```
 
-This code detects if there are missing values in the dataset and results show that **there are** missing values
+#### Why this code?
+
+This code **detects** if there are *missing values* in the dataset and results show that **there are** *missing values*
 in the data set. According to the image attaced below, the datatypes that include missing values are "_in_shazam_charts_" 
 and "_key._" The probable reasons for these missing values is that:
 1. The track isn't available on the platform (Shazam).
@@ -141,13 +143,15 @@ This objective is more focused on the following:
 
 Before starting any computation for the mean, median, and mode, sometimes there are tendencies where the numerical data
 contained in the column may be *non-numeric*. Because there may be a time where the error message, "n1, n2,..., nx cannot convert 
-to numeric," shows up when running the code. 
+to numeric," shows up when running the code.
+
 To troubleshoot, use the code below:
 ```
 print(df["streams"].dtype)
 ```
 In this current case, the datatype shows is "object" and it may contain non-numeric values. To convert and turn any non-numeric
 values into "NaN," you can use the code:
+
 ```
 df["streams"] = pd.to_numeric(df["streams"], errors="coerce")
 df["streams"].fillna(df["streams"].median(), inplace=True)
@@ -173,7 +177,7 @@ print("Mode:", mode)
 
 ## What is the distribution of the released_year and artist_count?
 
-### The code used:
+### The code used (year_release):
 
 ```
 year_bins = np.arange(1940, 2028, 4)  # Decade bins from 1940 to 2023
@@ -190,20 +194,21 @@ print("Year Release Analysis:")
 print(out_year)
 ```
 
-### Here are the results in a bargraph:
+### Here are the results in a bargraph (year_release):
 
 ![image](https://github.com/user-attachments/assets/ed45f836-fcd8-4ba6-8d23-0abe00d922cd)
 
-### Discussion of results:
+### Discussion of results (year_release):
 
-There seems to be a trend in regards to which tracks were mostly played on the different streaming platforms.
-Per usual, the tracks released recently (2020-2024) were streamed a lot while the older ones were not but was
-included in the list for the most streamed songs in Spotify. There are a few tracks included in the list
-that made it but it is believed to be the generational songs that also made it into the current generation's 
-ears. The popularity for older songs is also boosted because of vines, memes, short videos (tiktok, reels, shorts)
-and it makes them appreciate the older songs as well and be able to relate to their parents' music tastes.
+There seems to be a *trend* in regards to which **tracks were mostly played** on the different streaming platforms.
+Per usual, the *tracks* released **_recently_** (2020-2024) were **streamed a lot** while the **_older_** ones were not but was
+included in the list for the most streamed songs in Spotify.
+There are a few tracks included in the list that made it but it is believed to be the generational songs that also made it into 
+the current generation's ears. The popularity for older songs is also boosted because of vines, memes, 
+short videos (tiktok, reels, shorts) and it makes them appreciate the older songs as well and be able to relate 
+to their parents' music tastes.
 
-### Here is the code used:
+### Here is the code used (artist_count):
 ```
 artist_bins = np.arange(1, 8 + 1, 1)
 out_artist = df.groupby(pd.cut(df['artist_count'], artist_bins))['artist_count'] \
@@ -216,15 +221,16 @@ out_artist = df.groupby(pd.cut(df['artist_count'], artist_bins))['artist_count']
 print("Artist Count Analysis:")
 print(out_artist)
 ```
-### This gives the result:
+
+### This gives the result (artist_count):
 
 ![image](https://github.com/user-attachments/assets/cee0b544-1642-43b7-a082-a301219bb8a1)
 
-### Discussion of results:
+### Discussion of results (artist_count):
 
-Based on the table given by Jupyter Notebook, there are quite a lot of solo and duo artists in a single track.
-Tracks with 1 artist are the highest and as the number of artists featuring increases, there are fewer tracks 
-that has a lot of artists. With the highest count being 8.
+Based on the table given by Jupyter Notebook, there are quite **a lot** of *solo and duo artists* in a single track.
+Tracks with **1** artist were the *highest* and as the number of artists featuring *increases*, there are **fewer** tracks 
+that has **a lot of artists**. With the *highest count* being **8**.
 
 # 3. Top Performers
 
@@ -293,8 +299,8 @@ plt.show()
 
 ### Discussion of results
 
-Given how the nature of this dataset goes, it was expected that the recent releases were mostly topping the charts. Since this is a dataset covering
-the top 2023 spotify songs, the older songs were shadowed by the huge spike in graph. But like the explanation from earlier in obective number 2, the reason
+Given how the nature of this dataset goes, it was expected that the *recent releases* were mostly **topping** the charts. Since this is a dataset covering
+the top 2023 spotify songs, the *older songs* were **shadowed** by the huge spike in graph. But like the explanation from earlier in obective number 2, the reason
 why some of the older songs are featured in the dataset is due to the other listeners coming from the older generations, memes, tiktoks, and etc.
 
 ## Number of tracks released per Month
@@ -316,8 +322,8 @@ plt.show()
 
 ### Discussion of results:
 
-Suprisingly, January tops the chart and is followed by May. A quick Google search explains why. 
-Generally, the first two months of the year is a good time to release music because the market isn't that much
+Suprisingly, **January tops the chart** and is **followed by May**. A quick Google search explains why. 
+Generally, the *first two months of the year* is a **good time to release music** because the market isn't that much
 saturated compared to the releases within the year. And to the consumer's perspective, it would make sense since 
 after the exciting end to the year, people tend to look at the newer and hottest hits that would greatly symbolize their
 start of the year. 
@@ -356,16 +362,16 @@ plt.show()
 
 between streams and musical attributes like bpm, danceability_%, and energy_%. Which attributes seem to influence streams the most?
 
-For the comparison between bpm, danceability_%, and energy_%, the energy_% influences streams the most since at heart, people tend to 
+For the comparison between bpm, danceability_%, and energy_%. **Energy_% influences streams the most** since at heart, people tend to 
 listen to music to feel something maybe because of their emotional and physical reactions, maybe because of their social connections, rhythmic influence,
 and maybe to stimulate themselves. And sometimes the energy music brings to them gives them these feelings.
 
-As it is because of that, it influences the streams the most since it has the closest value to zero and it is followed by acousticness_% and intrumentalness_%.
+Because of that, it influences the streams the most since it has the closest value to zero and it is followed by acousticness_% and intrumentalness_%.
 
 # 6. Platform Popularity 
 
-This obective is divided into two parts, first is the comparison between spotify_playlists, spotify_charts, and apple_playlists. 
-While the second part comprises of every platform given in the dataset and compressed into one category to easily compare the final values.
+This obective is divided into two parts, first is the *comparison between spotify_playlists, spotify_charts, and apple_playlists.* 
+While the second part comprises of *every platform given in the dataset and compressed into one category to easily compare* the final values.
 
 The codes in regards to these parts are not placed in the repository due to the length of the lines of the code probably being too much for 
 the viewer. So instead, the important lines of code are presented to show how the process goes. Because in the second part, there are four different
@@ -379,6 +385,7 @@ platforms being compared and added on. The platforms and their respective sectio
 ## How do the numbers in spotify_playlists, spotify_charts, and apple_playlists compare?
 
 ### Here is a snippet of the code:
+
 ```
 # Calculate total occurrences for each platform
 spotify_playlists_total = df['in_spotify_playlists'].sum()
@@ -405,7 +412,7 @@ platform_counts = {
 
 ### Discussion of results
 
-For the three, it was heavily dominated by spotify_playlists followed by apple_playlists and the spotify_charts. Setting aside the dominance
+For the three, it was heavily **dominated by spotify_playlists** followed by apple_playlists and the spotify_charts. Setting aside the dominance
 of spotify_playlists, look at the comparison between charts and playlists. The track appearances are mostly tied to the consumer's playlists rather
 than the weekly or monthly ranking of the platforms' new top performing songs. It generally reflects the user's use of the app since most people nowadays
 would use these streaming apps to look, and download their favourite songs. Its very rare for a user to find and listen to the newer released songs in
@@ -450,8 +457,8 @@ shazam_total = top_tracks_shazam_charts  # Shazam only has charts, not playlists
 
 ### Discussion of results
 
-Its no suprise that Spotify continued to dominate in this graph since its currently and probably for a long time, the 
-largest and most popular music streaming platforms globally, with users reaching the hundred millions all around the world.
+Its no suprise that **Spotify continued to dominate in this graph** since its currently and probably for a long time, the 
+*largest and most popular* music streaming platform globally, with users reaching the hundred millions all around the world.
 With Apple Music coming in second followed by Deezer and Shazam. Currently, the top two music streaming platforms are 
 generally known to a wider audience but since Apple Music is limited to ios and or iMusic softwares and Deezer and Shazam not being
 well-known to the average consumer and maybe even the artist, they would most likely prefer to publish or listen to songs 
@@ -480,11 +487,11 @@ key_mode_streams = df.groupby(['key', 'mode'])['streams'].mean().unstack()
 
 ### Discussion of results
 
-The key findings in the graph is that the consumers would prefer to listen to songs that has an average key from F to C# and they 
-would prefer to have a mode that is a Major. The reason why consumers would prefer to listen to songs that mostly have a mode of 
-Major is because of its songs generally being happy while Minor modes tend to be intensive or melancholic. For the key signatures, 
-the consumers gravitate towards the keys that are F, E, D#, D, and C#. The reason also ties with the preference of songs that are
-generally happy, warm, and have common instruments that accompanies the vocalists very well.
+The key findings in the graph is that the consumers would **_prefer_** to listen to songs that has an average *key* from **F to C#** and they 
+would prefer to have a *mode* that is a **Major**. The reason why consumers would prefer to listen to songs that mostly have a mode of 
+Major is because of its songs generally being happy while Minor modes tend to be intensive or melancholic.
+For the key signatures, the consumers gravitate towards the keys that are F, E, D#, D, and C#. The reason also ties with the 
+preference of songs that are generally happy, warm, and have common instruments that accompanies the vocalists very well.
 
 ## Top Artists in Playlists and Charts
 
@@ -514,7 +521,7 @@ top_artists = artist_popularity['Total'].sort_values(ascending=False).head(10)
 
 ### Discussion of results
 
-The top three is The Weeknd, Taylor Swift, and Ed Sheeran. 2023 was a blast for The Weeknd since he has had a lot of 
+The *top three* is **The Weeknd, Taylor Swift, and Ed Sheeran.** 2023 was a blast for The Weeknd since he has had a lot of 
 major breakthroughs in regards to his music career in 2023. He has had major hits from his newer ("Blinding Lights") and older songs and was
 probably the most well-known singer in 2023. The second spot is from Taylor Swift whom in 2023 had a breakthrough in her career.
 from re-releasing her older albums (1989), to having the highest-grossing concert of all time, it was no suprise that she made it to second. 
@@ -522,8 +529,8 @@ And finally completing the top three is Ed Sheeran which is suprising since late
 Though not well-known around here in the Philippines, he has done quite a lot of concerts (large and one-to-one) that gained traction around the internet 
 and that made people love the guy. 
 
-Oh and do note that since the dataset also includes numbers from playlists, it is also expected that some of the older
-artists can make it into the graph.
+Oh and do note that since the dataset also **includes numbers from playlists**, it is also expected that some of the **older
+artists can make it into the graph.**
 
 # 8. Comments and recommendations by the author
 
