@@ -532,6 +532,25 @@ and that made people love the guy.
 Oh and do note that since the dataset also **includes numbers from playlists**, it is also expected that some of the **older
 artists can make it into the graph.**
 
-# 8. Comments and recommendations by the author
+# 8. Comments and recommendations by the author (not a professional artist)
 
+As much as possible that I want to compress everything into a single paragraph, I would like to use bullet points for the reccomendations
+and comments because it would probably be the best option for this.
 
+## If you are an artist that is aspiring to be big in the future, based on the analysis you should:
+
+- It is best to release songs along the start (first two months) of the first and second quarters of the year since these are the times when people do have the time to listen to the songs and they would like to start the year or summer with a blast.
+- Make a song that focuses on bringing the energy you produce from music towards the audience since this would have a great impact towards their emotions, (Mali to acousticness_% dapat yung most focused pero isama na din yung energy)
+- It is also best that you should publish your songs on Spotify since its the largest streaming platform currently and capitalizing on its recent rise is also a good thing.
+- Focus on having a song that has fluctuating key signatures from "F" to "C#" and a mode that is "Major" as they're mostly warm, happy, and it tends to blend to the instruments and vocalists very well.
+
+ ## If you are also doing the same dataset analysis:
+
+ - Take extra care of the missing values within the datatypes since this would cause a lot of trouble if you're analyzing data and is not sure if the code is incorrect or the ".csv" file download and import caused issues.
+ - If you're doing this for an assignment, its best to give the whole assignment a whole week since there is a lot of code, graphs, and analysis to be covered and cramming everything in one day is not recommended.
+ - Research some of the trends and fact check them to confirm that the analysis was correct.
+
+ ## Final remarks
+
+ Some of the comments here is just opinions from the author, as everyone has their own ways in dealing data or making music. These are just the results and trends seen from the analysis and it may be useful towards the artist or programmer who is doing their passions in life. 
+  
