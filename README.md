@@ -1,6 +1,7 @@
 # ECE2112_SDA
-**John Felipe M. Domingo
-2ECE-A**
+Done by: **John Felipe M. Domingo**
+
+Section: **2ECE-A**
 
 # Introduction
 
