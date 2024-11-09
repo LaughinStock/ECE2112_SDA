@@ -240,28 +240,44 @@ the items** through the top 5 most streamed tracks and the top 5 most frequent a
 to access each tracks' information and **output** the **correct and specific details** neatly.
 
 ## Which track has the **highest** number of *'streams'*? Display the **top 5 most** streamed *tracks*.
-using the code below:
+### using the code below:
 ```
 most_streamed_tracks = df.sort_values(by='streams', ascending = False).head(5)
 print("Top 5 most streamed tracks:")
 for idx, row in most_streamed_tracks.iterrows():
     print(f"Track: {row['track_name']}, Streams: {row['streams']}")
 ```
-The results are:
+### The results computed are:
 
 ![image](https://github.com/user-attachments/assets/d1be8c60-d80f-4308-9114-313fed585d47)
 
+### Discussion of results:
+
+Despite the song being released in 2020, the *track* with the **highest** number of *'streams'* is "Blinding Lights" 
+from The Weeknd having 3.7 billion streams, followed by "Shape of You" by Ed Sheeran with 3.56 billion and 
+"Someone You Loved" by Lewis Capaldi with 2.88 billion streams. 
+
 ## Who are the **top 5** most frequent artists based on the number of tracks in the dataset?
-using the code below:
+
+### using the code below:
 ```
 top_5_artists = df['artist(s)_name'].value_counts().head(5)
 print("Top 5 most frequent artists:")
 for artist, count in top_5_artists.items():
     print(f"Artist: {artist}, Frequency: {count}")
 ```
-The results are:
+### The results computed are:
 
 ![image](https://github.com/user-attachments/assets/f4936d84-cda9-440d-bd38-68b0864633eb)
+
+### Discussion of results:
+
+The top three *artist(s)* who were the **most frequent** in the data set were Taylor Swift with 34, The Weeknd with 22, and Bad Bunny with 19. 
+Taylor Swift was extremely popular in 2023 due to having released and re-released albums that skyrocketed her fame and having "The Eras Tour"
+concert that made her even popular. Along with her, The Weeknd also gotten pretty popular after his hit after hit releases of music. But the people 
+are not only coming back just for one song, they are also looking back at his older hits to learn and listen more about hit music. Bad Bunny is a
+Puerto Rican rapper that has found success after his hit song "Diles" in 2016. His charisma and music style resonated with people and that has helped 
+him to gain popularity.
 
 # 4. Temporal trends
 
@@ -275,6 +291,8 @@ a. For annual trends:
 # Group by release year and count the number of tracks released each year
 annual_trends = df.groupby('released_year').size()  # This will give the count of tracks per year
 ```
+
+### Discussion of results:
 
 b. For monthly trends:
 
