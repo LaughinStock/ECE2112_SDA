@@ -4,7 +4,7 @@ John Felipe M. Domingo
 
 # Introduction
 
-This is a *preliminary comprehensive assignment* and *incentive* that deals with understanding and analyzing 
+This is a *preliminary comprehensive assignment* that deals with understanding and analyzing 
 the dataset "Most Streamed Spotify Songs 2023." At the end of the assignment, the student is
 expected to explore, analyze, visualize, and interpret the data to extract meaningful insights.
 
