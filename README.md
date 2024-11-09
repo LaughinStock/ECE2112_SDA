@@ -1,6 +1,6 @@
-# ECE2112_SDA_Incentive
-John Felipe M. Domingo
-2ECE-A
+# ECE2112_SDA
+**John Felipe M. Domingo
+2ECE-A**
 
 # Introduction
 
